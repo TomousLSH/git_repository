@@ -1,5 +1,10 @@
 package com.example.demo.bean;
 
+/**
+ * test
+ * @author Administrator
+ *
+ */
 public class Greet {
     public long getId() {
 		return id;
