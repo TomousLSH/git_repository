@@ -11,15 +11,9 @@
 
 	<!-- 读取配置文件 -->
 	<bean id="student" class="com.example.demo.test.spring.bean.Student" init-method="init" destroy-method="destroy">
-		<property name="env" value="${envconfig}" />
+		<property name="env" value="${envconfigs}" />
 		<property name="name" value="lsh" />
 		
 	</bean>
 	
-    	<!-- 读取配置文件 -->
-	<bean id="student1" class="com.example.demo.test.spring.bean.Student" init-method="init" destroy-method="destroy">
-		<property name="env" value="${envconfig}" />
-		<property name="name" value="stu1" />
-		
-	</bean>
 </beans>

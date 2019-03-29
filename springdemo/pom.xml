@@ -51,14 +51,51 @@
 		
 	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+
+<profiles>
+	<profile>
+		<id>dev</id>
+
+
+		<build>
+			<filters>
+				<filter>src/main/filter/config-dev.properties</filter>
+			</filters>
+		</build>
+	</profile>
+	<profile>
+		<!-- 默认激活开发配制，使用config-dev.properties来替换设置过虑的资源文件中的${key} -->
+		<activation>
+			<activeByDefault>true</activeByDefault>
+		</activation>
+		<id>test</id>
+		<build>
+			<filters>
+				<filter>src/main/filter/config-test.properties</filter>
+			</filters>
+		</build>
+	</profile>
+	<profile>
+		<id>product</id>
+		<build>
+			<filters>
+				<filter>src/main/filter/config-pro.properties</filter>
+			</filters>
+		</build>
+	</profile>
+</profiles>  
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </project>
