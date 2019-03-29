@@ -7,7 +7,6 @@ import com.example.demo.test.spring.aop.service.Caculator;
 import com.example.demo.test.spring.aop.service.impl.MathCaculator;
 import com.example.demo.test.spring.aop.service.impl.MathCaculatorProxy;
 import com.example.demo.test.spring.aop.service.impl.OrderService;
-import com.sun.accessibility.internal.resources.accessibility;
 
 public class Main {
 	private static int count = 0;
