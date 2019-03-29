@@ -15,7 +15,7 @@ public class Spring1 {
 	      
 		   //--
 		   Thread.sleep(1000);
-		   
+		   //再次远程提交
 	       ClassPathXmlApplicationContext ct = (ClassPathXmlApplicationContext) context;
 	       ct.close();
 	   
