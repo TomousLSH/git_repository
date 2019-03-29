@@ -13,7 +13,7 @@ public class Spring1 {
 		   Student student= (Student) context.getBean("student");
 		   System.err.println("开始使用bean： "+student);
 	      
-		   
+		   //--
 		   Thread.sleep(1000);
 		   
 	       ClassPathXmlApplicationContext ct = (ClassPathXmlApplicationContext) context;
