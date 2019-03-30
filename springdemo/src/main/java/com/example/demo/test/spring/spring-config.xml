@@ -8,9 +8,8 @@
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!-- 导入属性文件 -->
-    <context:property-placeholder location="classpath:application.properties"/>
+    <context:property-placeholder location="classpath:application.properties" />
 
     <import resource="spring-bean-config.xml"/>	
-	
 
 </beans>
