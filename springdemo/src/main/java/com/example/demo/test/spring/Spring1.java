@@ -2,9 +2,9 @@ package com.example.demo.test.spring;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.test.spring.bean.Student;
-
 
 public class Spring1 {
    public static void main(String[] args) throws InterruptedException {
@@ -18,6 +18,8 @@ public class Spring1 {
 		   //再次远程提交
 	       ClassPathXmlApplicationContext ct = (ClassPathXmlApplicationContext) context;
 	       ct.close();
-	   
     }
+   
+
+   
 }

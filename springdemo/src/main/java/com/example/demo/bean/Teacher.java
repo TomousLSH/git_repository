@@ -30,7 +30,7 @@ public class Teacher {
 		}
 
 		Map<String,Object> map = new HashMap<>();
-		map.put("aa",new String("aaaaaaa"));
+		map.put("aa", "aaaaaaa");
 
 
 	}

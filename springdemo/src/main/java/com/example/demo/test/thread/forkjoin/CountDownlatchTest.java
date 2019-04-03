@@ -12,7 +12,7 @@ public class CountDownlatchTest {
 		private static CountDownLatch ct;
 		public UseRunnable(CountDownLatch ct) {
 			super();
-			this.ct = ct;
+			UseRunnable.ct = ct;
 			// TODO Auto-generated constructor stub
 		}
 

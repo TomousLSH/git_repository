@@ -24,12 +24,10 @@ public class Main {
 
         System.out.println("result:" + caculator.div(12, 2));
 
-
         Thread.sleep(1000);
 
         ClassPathXmlApplicationContext ct = (ClassPathXmlApplicationContext) context;
         ct.close();
-
     }
 
 
