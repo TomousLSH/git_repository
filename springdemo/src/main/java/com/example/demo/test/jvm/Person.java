@@ -1,6 +1,10 @@
 package com.example.demo.test.jvm;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable {
+
+    private static final long serialVersionUID = -5078430378850292287L;
     String name;
 
     public String getName() {
