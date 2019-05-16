@@ -5,5 +5,7 @@ public class WebSocketService {
         System.out.println("websocket test");
 
         System.out.println("branch001");
+
+        System.out.println("branch002");
     }
 }
