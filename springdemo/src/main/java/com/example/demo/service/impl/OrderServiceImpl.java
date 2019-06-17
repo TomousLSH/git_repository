@@ -1,20 +1,11 @@
 package com.example.demo.service.impl;
 
 import com.alibaba.druid.util.StringUtils;
-import com.example.demo.bean.Goods;
-import com.example.demo.bean.UserBean;
-import com.example.demo.curator.LockPathPrefix;
-import com.example.demo.curator.LockUtil;
-import com.example.demo.curator.ZkClientFactory;
 import com.example.demo.dao.OrderMapper;
-import com.example.demo.dao.UserBeanMapper;
 import com.example.demo.redis.RedisLock;
 import com.example.demo.service.OrderService;
-import com.example.demo.service.UserService;
-import com.example.demo.util.SleepUtil;
-import org.apache.curator.framework.CuratorFramework;
-import org.apache.curator.framework.recipes.locks.InterProcessMutex;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +20,10 @@ public class OrderServiceImpl implements OrderService {
     RedisLock redisLock;
 
     @Autowired
-    StringRedisTemplate redisTemplate;
+    StringRedisTemplate stringRedisTemplate;
+
+    @Autowired
+    RedisTemplate redisTemplate;
 
 
 //    @Override
@@ -72,13 +66,15 @@ public class OrderServiceImpl implements OrderService {
             System.out.println("规定时间内未获取到锁");
             throw new RuntimeException("规定时间内未获取到锁");
         }
-        Goods goods = orderMapper.selectByPrimaryKey(id);
-        //更新
-        goods.setStock(goods.getStock()-1);
-        orderMapper.updateByPrimaryKeySelective(goods);
+//        Goods goods = orderMapper.selectByPrimaryKey(id);
+//        //更新
+//        goods.setStock(goods.getStock()-1);
+//        orderMapper.updateByPrimaryKeySelective(goods);
+        System.out.println("程序执行中...");
+
 
         //解锁
-        String lockValue = redisTemplate.opsForValue().get(lockKey);
+        String lockValue = stringRedisTemplate.opsForValue().get(lockKey);
         if(redisLock.releaseLock(lockKey,lockValue)){
             System.out.println("解锁成功");
         }else{
@@ -86,6 +82,6 @@ public class OrderServiceImpl implements OrderService {
         }
         System.out.println("redis值:"+lockValue);
 
-        redisTemplate.opsForValue().set("name", "aaa");
+
     }
 }
