@@ -7,6 +7,8 @@ import org.apache.curator.retry.ExponentialBackoffRetry;
 
 public class ZkClientFactory {
 
+    private static CuratorFramework client = null;
+
     /**
      * @param connectionString zk的连接地址
      * @return CuratorFramework 实例
@@ -21,7 +23,12 @@ public class ZkClientFactory {
         // 获取 CuratorFramework 实例的最简单的方式
         // 第一个参数：zk的连接地址
         // 第二个参数：重试策略
-        return CuratorFrameworkFactory.newClient(connectionString, retryPolicy);
+        if(null==client){
+            client= CuratorFrameworkFactory.newClient(connectionString, retryPolicy);
+            client.start();
+        }
+
+        return client;
     }
 
     /**
