@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.alibaba.druid.util.StringUtils;
+import com.example.demo.bean.Goods;
 import com.example.demo.dao.OrderMapper;
 import com.example.demo.redis.RedisLock;
 import com.example.demo.service.OrderService;
@@ -8,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.Random;
+import java.util.UUID;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -62,25 +66,26 @@ public class OrderServiceImpl implements OrderService {
         Integer id = 1;
 
         String lockKey = "goods_"+id;
-        if(StringUtils.isEmpty(redisLock.tryLock(lockKey))){
+        UUID uuid = UUID.randomUUID();
+
+        if(StringUtils.isEmpty(redisLock.tryLock(lockKey,uuid.toString()))){
             System.out.println("规定时间内未获取到锁");
             throw new RuntimeException("规定时间内未获取到锁");
         }
-//        Goods goods = orderMapper.selectByPrimaryKey(id);
-//        //更新
-//        goods.setStock(goods.getStock()-1);
-//        orderMapper.updateByPrimaryKeySelective(goods);
-        System.out.println("程序执行中...");
+        Goods goods = orderMapper.selectByPrimaryKey(id);
+        //更新
+        goods.setStock(goods.getStock()-1);
+        orderMapper.updateByPrimaryKeySelective(goods);
+        //System.out.println("程序执行中...");
 
 
         //解锁
-        String lockValue = stringRedisTemplate.opsForValue().get(lockKey);
-        if(redisLock.releaseLock(lockKey,lockValue)){
+        //String lockValue = stringRedisTemplate.opsForValue().get(lockKey);
+        if(redisLock.releaseLock(lockKey,uuid.toString())){
             System.out.println("解锁成功");
         }else{
             System.out.println("解锁失败");
         }
-        System.out.println("redis值:"+lockValue);
 
 
     }

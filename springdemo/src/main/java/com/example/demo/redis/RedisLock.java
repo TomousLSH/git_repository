@@ -12,7 +12,7 @@ import java.util.Collections;
 @Component
 public class RedisLock {
 
-    private Integer acquireTimeout = 1000;//尝试获取锁的时限 ms
+    private Integer acquireTimeout = 10000;//尝试获取锁的时限 ms
     private Integer acquireInterval = 10;//尝试获取锁的时间间隔 ms
     private Integer lockTime = 1000000;//资源占有锁的时间 秒s
 
@@ -27,9 +27,8 @@ public class RedisLock {
     private RedisScript<Integer> releaseLock;
 
 
-    public String tryLock(String lockKey) {
+    public String tryLock(String lockKey,String lockVal) {
         StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
-        String lockValue = "lock";
 
 
 
@@ -41,10 +40,10 @@ public class RedisLock {
             //Long lockResult = (Long) redisTemplate.execute(acquireLockWithTimeout, Collections.singletonList(lockKey), lockValue, lockTime);
 
             //lua 脚本使用这个
-            Long lockResult = (Long)redisTemplate.execute(acquireLockWithTimeout, stringRedisSerializer, stringRedisSerializer, Collections.singletonList(lockKey), lockValue, lockTime + "");
+            Long lockResult = (Long)redisTemplate.execute(acquireLockWithTimeout, stringRedisSerializer, stringRedisSerializer, Collections.singletonList(lockKey), lockVal, lockTime + "");
 
             if (lockResult.equals(1L)) {
-                return lockValue+"";
+                return lockVal+"";
             } else {
                 try {
                     Thread.sleep(acquireInterval);
@@ -58,16 +57,14 @@ public class RedisLock {
 
     public boolean releaseLock(String lockKey, String lockValue) {
         StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
-
-        System.out.println("lockvalue:"+lockValue);
-        //Long releaseResult = (Long) redisTemplate.execute(releaseLock, Collections.singletonList(lockKey), lockValue);
-        Long releaseResult = (Long) redisTemplate.execute(releaseLock,stringRedisSerializer,stringRedisSerializer, Collections.singletonList(lockKey), lockValue);
-        System.out.println("releaseResult:"+releaseResult);
+        Long releaseResult = (Long) redisTemplate.execute(releaseLock,stringRedisSerializer,stringRedisSerializer, Collections.singletonList(lockKey),lockValue);
+        //System.out.println("----releaseResult:"+releaseResult);
         if (releaseResult.equals(1L)) {
 
             return true;
         }
         return false;
+
     }
 
 }
