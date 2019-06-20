@@ -4,4 +4,11 @@ import com.example.demo.bean.UserBean;
 
 public interface OrderService {
     void buy();
+
+    void testPipeline(int num);
+
+    void testNoPipeline();
+
+    void redistransaction();
+
 }

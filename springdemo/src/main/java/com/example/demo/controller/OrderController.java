@@ -19,4 +19,29 @@ public class OrderController {
         orderService.buy();
         return "success";
     }
+
+    @RequestMapping("/pipeline")
+    public String pipeline(HttpServletRequest request){
+        String a = request.getParameter("num");
+        int num = Integer.parseInt(a);
+        System.out.println("接收参数:"+num);
+        orderService.testPipeline(num);
+        return "success";
+    }
+
+    @RequestMapping("/nopipeline")
+    public String nopipeline(HttpServletRequest request){
+
+        orderService.testNoPipeline();
+        return "success";
+    }
+
+    @RequestMapping("/redistransaction")
+    public String redistransaction(HttpServletRequest request){
+
+        orderService.redistransaction();
+        return "success";
+    }
+
+
 }

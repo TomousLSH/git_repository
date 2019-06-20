@@ -15,7 +15,6 @@ import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.data.Stat;
-import sun.misc.Cleaner;
 
 import java.util.Collections;
 import java.util.List;
