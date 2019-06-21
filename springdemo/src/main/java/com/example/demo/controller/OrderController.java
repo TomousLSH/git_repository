@@ -44,4 +44,10 @@ public class OrderController {
     }
 
 
+    @RequestMapping("/testSentinel")
+    public String testSentinel(HttpServletRequest request){
+
+        orderService.testSentinel();
+        return "success";
+    }
 }

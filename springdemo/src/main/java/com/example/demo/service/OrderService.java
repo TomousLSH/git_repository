@@ -11,4 +11,6 @@ public interface OrderService {
 
     void redistransaction();
 
+    public void testSentinel();
+
 }

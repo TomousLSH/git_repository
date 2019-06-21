@@ -206,8 +206,15 @@ public class OrderServiceImpl implements OrderService {
 
     }
 
-    public static void main(String[] args){
-       new OrderServiceImpl().testHashMapper();
+    @Override
+    public void testSentinel(){
+        RedisChangeDbUtil.changeDb(stringRedisTemplate, 1);
+        String date = stringRedisTemplate.opsForValue().get("beginTime");
+        System.out.println("sentinel:"+date);
+
+        RedisChangeDbUtil.changeDb(stringRedisTemplate, 5);
+        stringRedisTemplate.opsForValue().set("name", "lig");
     }
+
 
 }

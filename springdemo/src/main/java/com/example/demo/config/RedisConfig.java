@@ -59,17 +59,17 @@ public class RedisConfig {
     /**
      * Lettuce
      */
-    @Primary
-    @Bean("lettuceStandAloneConnectionFactory")
-    public RedisConnectionFactory lettuceStandAloneConnectionFactory() {
-
-        RedisStandaloneConfiguration standaloneConfiguration = new RedisStandaloneConfiguration();
-        standaloneConfiguration.setDatabase(0);
-        standaloneConfiguration.setHostName("localhost");
-        standaloneConfiguration.setPort(6379);
-
-        return new LettuceConnectionFactory(standaloneConfiguration);
-    }
+//    @Primary
+//    @Bean("lettuceStandAloneConnectionFactory")
+//    public RedisConnectionFactory lettuceStandAloneConnectionFactory() {
+//
+//        RedisStandaloneConfiguration standaloneConfiguration = new RedisStandaloneConfiguration();
+//        standaloneConfiguration.setDatabase(0);
+//        standaloneConfiguration.setHostName("localhost");
+//        standaloneConfiguration.setPort(6378);
+//
+//        return new LettuceConnectionFactory(standaloneConfiguration);
+//    }
 
     /**
      * Lettuce
@@ -78,8 +78,8 @@ public class RedisConfig {
     public RedisConnectionFactory lettuceSentineConnectionFactory() {
         RedisSentinelConfiguration sentinelConfig = new RedisSentinelConfiguration()
                 .master("mymaster")
-                .sentinel("127.0.0.1", 26379)
-                .sentinel("127.0.0.1", 26380);
+                .sentinel("10.237.22.190", 9379)
+                .sentinel("10.237.22.192", 9380);
 
 
         return new LettuceConnectionFactory(sentinelConfig);
