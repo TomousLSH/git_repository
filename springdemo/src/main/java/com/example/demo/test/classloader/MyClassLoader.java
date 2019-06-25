@@ -1,6 +1,6 @@
 package com.example.demo.test.classloader;
 
-import java.io.ByteArrayOutputStream;
+import org.apache.commons.io.IOUtils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -38,11 +38,12 @@ public class MyClassLoader extends ClassLoader{
         try {
             int i;
             InputStream inputStream = new FileInputStream(path);
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            while ((i = inputStream.read(container)) != -1) {
-                out.write(container,0,i);
-            }
-            return out.toByteArray();
+//            ByteArrayOutputStream out = new ByteArrayOutputStream();
+//            while ((i = inputStream.read(container)) != -1) {
+//                out.write(container,0,i);
+//            }
+//            return out.toByteArray();
+            return IOUtils.toByteArray(inputStream);
         } catch (Exception e) {
         }
         return null;
