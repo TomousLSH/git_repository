@@ -8,12 +8,13 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
 import java.util.Date;
+import java.util.UUID;
 
 public class JwtUtil {
 
     public static void main(String[] args){
 
-        System.out.println(createJWT(30000));
+        System.out.println(createJWT(600000));
 
     }
 
@@ -27,12 +28,15 @@ public class JwtUtil {
         Date now = new Date(nowMillis);
 
         //We will sign our JWT with our ApiKey secret
-        String secret = "u68S1WzV1668HQfqYmjnZkeBWOyPw58e"; //此处字符串对应consumer中jwt参数的secret
+        String secret = "c39zeyoSAg3ubsdQOGj2QuzO4KdB4uVc"; //此处字符串对应consumer中jwt参数的secret
 
+        String uuid = UUID.randomUUID().toString();
+        System.out.println(uuid);
         //Let's set the JWT Claims
         JwtBuilder builder = Jwts.builder()
-                .setIssuer("TBi6JFdoC44Bow69Ee5EOiDJoC5TyM6x") //此处字符串对应consumer中jwt参数的key
+                .setIssuer("woJcpcvdiSpIvsMW6VNF2EOGNPcb47Fz") //此处字符串对应consumer中jwt参数的key
                 .setIssuedAt(new Date())
+                .setSubject(uuid)
                 .signWith(signatureAlgorithm, secret);
 
         //if it has been specified, let's add the expiration

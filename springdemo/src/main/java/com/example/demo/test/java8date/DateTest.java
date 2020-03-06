@@ -3,6 +3,7 @@ package com.example.demo.test.java8date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 public class DateTest {
@@ -40,6 +41,9 @@ public class DateTest {
 
         System.out.println(localDateTime2.isBefore(localDateTime));
 
+        System.out.println("---------------------");
+        long value = 1562222972968L;
+
     }
 
 
@@ -53,5 +57,15 @@ public class DateTest {
 
     private static String formatLocalTime(LocalTime localTime){
         return localTime.format(timeFormatter);
+    }
+
+
+    public static String timestampToLocalDateTimeStrWithMillsecond(long millisecond){
+        return timestampToLocalDateTimeStrWithSecond(millisecond/1000);
+    }
+
+    public static String timestampToLocalDateTimeStrWithSecond(long second){
+        LocalDateTime localDateTime = LocalDateTime.ofEpochSecond(second, 0, ZoneOffset.ofHours(8));
+        return formatLocalDateTime(localDateTime);
     }
 }

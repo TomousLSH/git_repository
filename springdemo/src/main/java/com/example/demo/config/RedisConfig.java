@@ -13,7 +13,9 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisSentinelConfiguration;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
+import org.springframework.data.redis.connection.lettuce.LettuceClientConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettucePoolingClientConfiguration;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
@@ -80,6 +82,8 @@ public class RedisConfig {
                 .master("mymaster")
                 .sentinel("10.237.22.190", 9379)
                 .sentinel("10.237.22.192", 9380);
+
+        //LettucePoolingClientConfiguration clientConfiguration = LettucePoolingClientConfiguration.builder().poolConfig();
 
 
         return new LettuceConnectionFactory(sentinelConfig);
